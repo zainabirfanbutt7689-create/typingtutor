@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <ellipse cx="80" cy="148" rx="42" ry="10" fill="#E2E8F0" opacity="0.6" />
+  <!-- Bunny Ears -->
+  <g>
+    <ellipse cx="55" cy="42" rx="14" ry="38" fill="#FCE7F3" stroke="#F472B6" stroke-width="3" transform="rotate(-12 55 42)" />
+    <ellipse cx="56" cy="44" rx="7" ry="24" fill="#F472B6" transform="rotate(-12 56 44)" opacity="0.6" />
+    <ellipse cx="105" cy="42" rx="14" ry="38" fill="#FCE7F3" stroke="#F472B6" stroke-width="3" transform="rotate(12 105 42)" />
+    <ellipse cx="104" cy="44" rx="7" ry="24" fill="#F472B6" transform="rotate(12 104 44)" opacity="0.6" />
+  </g>
+  <!-- Bunny Body -->
+  <circle cx="80" cy="104" r="44" fill="#FFF1F2" stroke="#FDA4AF" stroke-width="3" />
+  <!-- Rosy Cheeks -->
+  <ellipse cx="54" cy="112" rx="8" ry="5" fill="#FB7185" opacity="0.4" />
+  <ellipse cx="106" cy="112" rx="8" ry="5" fill="#FB7185" opacity="0.4" />
+  <!-- Eyes -->
+  <circle cx="66" cy="98" r="5" fill="#831843" />
+  <circle cx="68" cy="96" r="1.8" fill="#FFFFFF" />
+  <circle cx="94" cy="98" r="5" fill="#831843" />
+  <circle cx="96" cy="96" r="1.8" fill="#FFFFFF" />
+  <!-- Nose & Smile -->
+  <polygon points="80,107 75,102 85,102" fill="#F43F5E" />
+  <path d="M 80 107 Q 73 118 68 114" fill="none" stroke="#831843" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M 80 107 Q 87 118 92 114" fill="none" stroke="#831843" stroke-width="2.5" stroke-linecap="round" />
+  <!-- Paws -->
+  <circle cx="62" cy="134" r="9" fill="#FFF1F2" stroke="#FDA4AF" stroke-width="2.5" />
+  <circle cx="98" cy="134" r="9" fill="#FFF1F2" stroke="#FDA4AF" stroke-width="2.5" />
+</svg>

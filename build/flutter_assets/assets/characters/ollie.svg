@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <ellipse cx="80" cy="148" rx="38" ry="8" fill="#E2E8F0" opacity="0.6" />
+  <!-- Owl Body -->
+  <ellipse cx="80" cy="98" rx="42" ry="45" fill="#DDD6FE" stroke="#A78BFA" stroke-width="3" />
+  <!-- Feather belly -->
+  <ellipse cx="80" cy="110" rx="26" ry="26" fill="#F5F3FF" />
+  <!-- Ear Tufts -->
+  <polygon points="46,58 56,76 40,76" fill="#C4B5FD" />
+  <polygon points="114,58 104,76 120,76" fill="#C4B5FD" />
+  <!-- Large Glasses -->
+  <circle cx="62" cy="88" r="18" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="3.5" />
+  <circle cx="98" cy="88" r="18" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="3.5" />
+  <line x1="80" y1="88" x2="80" y2="88" stroke="#8B5CF6" stroke-width="4" />
+  <!-- Pupils -->
+  <circle cx="62" cy="88" r="6" fill="#5B21B6" />
+  <circle cx="64" cy="86" r="2.5" fill="#FFFFFF" />
+  <circle cx="98" cy="88" r="6" fill="#5B21B6" />
+  <circle cx="100" cy="86" r="2.5" fill="#FFFFFF" />
+  <!-- Orange Beak -->
+  <polygon points="80,94 74,86 86,86" fill="#F97316" />
+  <!-- Rosy Cheeks -->
+  <circle cx="44" cy="98" r="5" fill="#EC4899" opacity="0.4" />
+  <circle cx="116" cy="98" r="5" fill="#EC4899" opacity="0.4" />
+</svg>

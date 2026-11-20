@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <ellipse cx="80" cy="148" rx="42" ry="10" fill="#E2E8F0" opacity="0.6" />
+  <!-- Dino Spikes -->
+  <polygon points="68,54 75,38 82,54" fill="#34D399" />
+  <polygon points="82,48 90,32 98,48" fill="#34D399" />
+  <!-- Dino Body -->
+  <circle cx="80" cy="98" r="44" fill="#A7F3D0" stroke="#10B981" stroke-width="3.5" />
+  <!-- Belly patch -->
+  <ellipse cx="80" cy="112" rx="24" ry="24" fill="#ECFDF5" />
+  <!-- Rosy Cheeks -->
+  <ellipse cx="54" cy="104" rx="7" ry="5" fill="#F472B6" opacity="0.4" />
+  <ellipse cx="106" cy="104" rx="7" ry="5" fill="#F472B6" opacity="0.4" />
+  <!-- Eyes -->
+  <circle cx="66" cy="90" r="5.5" fill="#065F46" />
+  <circle cx="68" cy="88" r="2" fill="#FFFFFF" />
+  <circle cx="94" cy="90" r="5.5" fill="#065F46" />
+  <circle cx="96" cy="88" r="2" fill="#FFFFFF" />
+  <!-- Cute smile -->
+  <path d="M 72 104 Q 80 114 88 104" fill="none" stroke="#065F46" stroke-width="3" stroke-linecap="round" />
+  <!-- Tiny Horns/Wings -->
+  <path d="M 40 102 Q 32 92 40 84" fill="#6EE7B7" stroke="#10B981" stroke-width="2.5" />
+  <path d="M 120 102 Q 128 92 120 84" fill="#6EE7B7" stroke="#10B981" stroke-width="2.5" />
+</svg>

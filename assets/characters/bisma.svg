@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <ellipse cx="80" cy="148" rx="44" ry="10" fill="#E2E8F0" opacity="0.6" />
+  <!-- Bear Ears -->
+  <circle cx="46" cy="52" r="18" fill="#FDE68A" stroke="#F59E0B" stroke-width="3" />
+  <circle cx="46" cy="52" r="9" fill="#FCD34D" />
+  <circle cx="114" cy="52" r="18" fill="#FDE68A" stroke="#F59E0B" stroke-width="3" />
+  <circle cx="114" cy="52" r="9" fill="#FCD34D" />
+  <!-- Bear Head & Body -->
+  <circle cx="80" cy="98" r="46" fill="#FEF3C7" stroke="#F59E0B" stroke-width="3.5" />
+  <!-- Yellow Bandana -->
+  <polygon points="60,132 80,148 100,132" fill="#F59E0B" />
+  <circle cx="70" cy="136" r="2" fill="#FFFFFF" />
+  <circle cx="90" cy="136" r="2" fill="#FFFFFF" />
+  <circle cx="80" cy="142" r="2" fill="#FFFFFF" />
+  <!-- Snout -->
+  <ellipse cx="80" cy="106" rx="20" ry="15" fill="#FFFBEB" stroke="#FCD34D" stroke-width="2" />
+  <!-- Nose -->
+  <polygon points="80,103 72,97 88,97" fill="#78350F" />
+  <!-- Smile -->
+  <path d="M 80 103 Q 73 113 68 109" fill="none" stroke="#78350F" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M 80 103 Q 87 113 92 109" fill="none" stroke="#78350F" stroke-width="2.5" stroke-linecap="round" />
+  <!-- Rosy Cheeks -->
+  <ellipse cx="52" cy="104" rx="7" ry="5" fill="#F43F5E" opacity="0.35" />
+  <ellipse cx="108" cy="104" rx="7" ry="5" fill="#F43F5E" opacity="0.35" />
+  <!-- Eyes -->
+  <circle cx="66" cy="86" r="5" fill="#78350F" />
+  <circle cx="68" cy="84" r="1.8" fill="#FFFFFF" />
+  <circle cx="94" cy="86" r="5" fill="#78350F" />
+  <circle cx="96" cy="84" r="1.8" fill="#FFFFFF" />
+  <!-- Paws -->
+  <circle cx="48" cy="132" r="9" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" />
+  <circle cx="112" cy="132" r="9" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2.5" />
+</svg>

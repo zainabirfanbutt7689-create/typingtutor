@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+import '../models/companion_model.dart';
+
+const List<Companion> kCompanions = [
+  Companion(
+    id: CompanionId.bisma,
+    name: 'Bisma',
+    species: 'Bear Cub',
+    tagline: 'Always ready with warm hugs and cheerful claps!',
+    emoji: '🐻',
+    accentColor: Color(0xFFD97706),
+    avatarBgColor: Color(0xFFFEF3C7),
+    svgAssetPath: 'assets/characters/bisma.svg',
+  ),
+  Companion(
+    id: CompanionId.pip,
+    name: 'Pip',
+    species: 'Little Bunny',
+    tagline: 'Hops with happiness whenever you hit the right key!',
+    emoji: '🐰',
+    accentColor: Color(0xFFDB2777),
+    avatarBgColor: Color(0xFFFCE7F3),
+    svgAssetPath: 'assets/characters/pip.svg',
+  ),
+  Companion(
+    id: CompanionId.sparky,
+    name: 'Sparky',
+    species: 'Baby Dino',
+    tagline: 'Blows magical friendly bubbles when you finish a word!',
+    emoji: '🦖',
+    accentColor: Color(0xFF059669),
+    avatarBgColor: Color(0xFFD1FAE5),
+    svgAssetPath: 'assets/characters/sparky.svg',
+  ),
+  Companion(
+    id: CompanionId.buzzy,
+    name: 'Buzzy',
+    species: 'Honey Bee',
+    tagline: 'Buzzes with excitement and leaves a trail of stars!',
+    emoji: '🐝',
+    accentColor: Color(0xFFCA8A04),
+    avatarBgColor: Color(0xFFFEF08A),
+    svgAssetPath: 'assets/characters/buzzy.svg',
+  ),
+  Companion(
+    id: CompanionId.ollie,
+    name: 'Ollie',
+    species: 'Wise Owl',
+    tagline: 'Reads fairy stories and cheers for every sentence!',
+    emoji: '🦉',
+    accentColor: Color(0xFF7C3AED),
+    avatarBgColor: Color(0xFFEDE9FE),
+    svgAssetPath: 'assets/characters/ollie.svg',
+  ),
+];
