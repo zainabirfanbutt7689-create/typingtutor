@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bisma.typingtutor">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Permissions for AI API, Google Fonts, and Audio -->
     <uses-permission android:name="android.permission.INTERNET" />

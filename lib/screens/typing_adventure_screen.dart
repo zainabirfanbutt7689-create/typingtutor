@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,8 @@ class TypingAdventureScreen extends StatefulWidget {
   const TypingAdventureScreen({super.key});
 
   @override
-  State<TypingAdventureScreen> createState() => _TypingAdventureScreenState();
+  State<TypingAdventureScreen> createState() =>
+      _TypingAdventureScreenState();
 }
 
 class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
@@ -33,7 +35,8 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
   @override
   void initState() {
     super.initState();
-    _confettiController = ConfettiController(duration: const Duration(seconds: 2));
+    _confettiController =
+        ConfettiController(duration: const Duration(seconds: 2));
   }
 
   @override
@@ -87,8 +90,8 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
     final controller = context.watch<TypingController>();
     final settings = controller.settings;
 
-    // Trigger confetti on celebrate
-    if (controller.companionMood == CompanionMood.celebrate && !settings.reducedMotion) {
+    if (controller.companionMood == CompanionMood.celebrate &&
+        !settings.reducedMotion) {
       _confettiController.play();
     }
 
@@ -98,6 +101,7 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
       onKey: (RawKeyEvent event) {
         if (event is RawKeyDownEvent) {
           final keyLabel = event.logicalKey.keyLabel;
+
           if (event.logicalKey == LogicalKeyboardKey.backspace) {
             controller.handleKeyPress('Backspace');
           } else if (event.logicalKey == LogicalKeyboardKey.space) {
@@ -113,7 +117,11 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
             Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [AppColors.bgStart, AppColors.bgMiddle, AppColors.bgEnd],
+                  colors: [
+                    AppColors.bgStart,
+                    AppColors.bgMiddle,
+                    AppColors.bgEnd,
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -121,106 +129,184 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
               child: SafeArea(
                 child: Column(
                   children: [
-                    // Top App Bar
+                    // Responsive Top App Bar
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 8.0),
-                      child: Row(
-                        children: [
-                          // Home button
-                          IconButton(
-                            icon: const Icon(Icons.home_rounded, color: AppColors.lavenderDark),
-                            tooltip: 'Back to Home',
-                            onPressed: () {
-                              controller.backToWelcome();
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(builder: (_) => const WelcomeScreen()),
-                              );
-                            },
-                          ),
-                          const SizedBox(width: 4),
-                          // Title & Mascot
-                          const Text('🐻', style: TextStyle(fontSize: 24)),
-                          const SizedBox(width: 6),
-                          const Text(
-                            'BISMA',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.lavenderDark,
-                            ),
-                          ),
-                          const Spacer(),
-
-                          // Sound Toggle
-                          IconButton(
-                            icon: Icon(
-                              settings.soundEnabled ? Icons.volume_up_rounded : Icons.volume_off_rounded,
-                              color: settings.soundEnabled ? AppColors.lavenderDark : const Color(0xFFFF69B4),
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              settings.soundEnabled = !settings.soundEnabled;
-                              controller.updateSettings(settings);
-                            },
-                          ),
-
-                          // AI Exercises Button
-                          TextButton.icon(
-                            icon: const Icon(Icons.auto_awesome, size: 16, color: Color(0xFF78350F)),
-                            label: const Text('AI', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF78350F))),
-                            style: TextButton.styleFrom(
-                              backgroundColor: AppColors.activeKeyGlow,
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(14),
-                                side: const BorderSide(color: AppColors.activeKeyBorder),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 6,
+                      ),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return Wrap(
+                            alignment: WrapAlignment.spaceBetween,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 4,
+                            runSpacing: 4,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    visualDensity: VisualDensity.compact,
+                                    icon: const Icon(
+                                      Icons.home_rounded,
+                                      color: AppColors.lavenderDark,
+                                    ),
+                                    tooltip: 'Back to Home',
+                                    onPressed: () {
+                                      controller.backToWelcome();
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (_) =>
+                                          const WelcomeScreen(),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                  const Text(
+                                    '🐻',
+                                    style: TextStyle(fontSize: 24),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  const Text(
+                                    'BISMA',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.lavenderDark,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (_) => const AiExercisePickerDialog(),
-                              );
-                            },
-                          ),
-                          const SizedBox(width: 6),
 
-                          // Single Unified Dashboard button
-                          ElevatedButton.icon(
-                            icon: const Icon(Icons.bar_chart_rounded, size: 16),
-                            label: const Text('Dashboard', style: TextStyle(fontSize: 12)),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.lavenderDark,
-                              foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                            ),
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => const ProgressDashboardScreen()),
-                              );
-                            },
-                          ),
-                          const SizedBox(width: 6),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    visualDensity: VisualDensity.compact,
+                                    icon: Icon(
+                                      settings.soundEnabled
+                                          ? Icons.volume_up_rounded
+                                          : Icons.volume_off_rounded,
+                                      color: settings.soundEnabled
+                                          ? AppColors.lavenderDark
+                                          : const Color(0xFFFF69B4),
+                                      size: 20,
+                                    ),
+                                    onPressed: () {
+                                      settings.soundEnabled =
+                                      !settings.soundEnabled;
+                                      controller.updateSettings(settings);
+                                    },
+                                  ),
 
-                          // Settings
-                          IconButton(
-                            icon: const Icon(Icons.settings_rounded, color: AppColors.lavenderDark, size: 20),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (_) => const SettingsModal(),
-                              );
-                            },
-                          ),
-                        ],
+                                  TextButton.icon(
+                                    icon: const Icon(
+                                      Icons.auto_awesome,
+                                      size: 16,
+                                      color: Color(0xFF78350F),
+                                    ),
+                                    label: const Text(
+                                      'AI',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: Color(0xFF78350F),
+                                      ),
+                                    ),
+                                    style: TextButton.styleFrom(
+                                      backgroundColor:
+                                      AppColors.activeKeyGlow,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                        vertical: 6,
+                                      ),
+                                      tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(14),
+                                        side: const BorderSide(
+                                          color: AppColors.activeKeyBorder,
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (_) =>
+                                        const AiExercisePickerDialog(),
+                                      );
+                                    },
+                                  ),
+
+                                  const SizedBox(width: 4),
+
+                                  ElevatedButton.icon(
+                                    icon: const Icon(
+                                      Icons.bar_chart_rounded,
+                                      size: 16,
+                                    ),
+                                    label: const Text(
+                                      'Dashboard',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      AppColors.lavenderDark,
+                                      foregroundColor: Colors.white,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                        vertical: 6,
+                                      ),
+                                      minimumSize: const Size(0, 36),
+                                      tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                        BorderRadius.circular(14),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (_) =>
+                                          const ProgressDashboardScreen(),
+                                        ),
+                                      );
+                                    },
+                                  ),
+
+                                  IconButton(
+                                    visualDensity: VisualDensity.compact,
+                                    icon: const Icon(
+                                      Icons.settings_rounded,
+                                      color: AppColors.lavenderDark,
+                                      size: 20,
+                                    ),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (_) =>
+                                        const SettingsModal(),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
 
                     // Stage Selector Strip
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       color: Colors.white.withOpacity(0.5),
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
@@ -229,39 +315,57 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
                             _buildStageChip(
                               label: 'Letters',
                               emoji: '🔤',
-                              isSelected: controller.activeAiExercise == null && controller.currentStage == StageId.alphabet,
-                              onTap: () => controller.selectStage(StageId.alphabet),
+                              isSelected:
+                              controller.activeAiExercise == null &&
+                                  controller.currentStage ==
+                                      StageId.alphabet,
+                              onTap: () =>
+                                  controller.selectStage(StageId.alphabet),
                             ),
                             const SizedBox(width: 6),
                             _buildStageChip(
                               label: 'Words',
                               emoji: '🌳',
-                              isSelected: controller.activeAiExercise == null && controller.currentStage == StageId.words,
-                              onTap: () => controller.selectStage(StageId.words),
+                              isSelected:
+                              controller.activeAiExercise == null &&
+                                  controller.currentStage ==
+                                      StageId.words,
+                              onTap: () =>
+                                  controller.selectStage(StageId.words),
                             ),
                             const SizedBox(width: 6),
                             _buildStageChip(
                               label: 'Sentences',
                               emoji: '🌈',
-                              isSelected: controller.activeAiExercise == null && controller.currentStage == StageId.sentences,
-                              onTap: () => controller.selectStage(StageId.sentences),
+                              isSelected:
+                              controller.activeAiExercise == null &&
+                                  controller.currentStage ==
+                                      StageId.sentences,
+                              onTap: () =>
+                                  controller.selectStage(StageId.sentences),
                             ),
                             const SizedBox(width: 6),
                             _buildStageChip(
                               label: 'Stories',
                               emoji: '🏰',
-                              isSelected: controller.activeAiExercise == null && controller.currentStage == StageId.paragraphs,
-                              onTap: () => controller.selectStage(StageId.paragraphs),
+                              isSelected:
+                              controller.activeAiExercise == null &&
+                                  controller.currentStage ==
+                                      StageId.paragraphs,
+                              onTap: () =>
+                                  controller.selectStage(StageId.paragraphs),
                             ),
                             const SizedBox(width: 6),
                             _buildStageChip(
                               label: 'AI Exercise',
                               emoji: '✨',
-                              isSelected: controller.activeAiExercise != null,
+                              isSelected:
+                              controller.activeAiExercise != null,
                               onTap: () {
                                 showDialog(
                                   context: context,
-                                  builder: (_) => const AiExercisePickerDialog(),
+                                  builder: (_) =>
+                                  const AiExercisePickerDialog(),
                                 );
                               },
                             ),
@@ -272,61 +376,85 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
 
                     // Middle Arena Area
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                        child: Column(
-                          children: [
-                            // Companion Cheer Row
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                      child: LayoutBuilder(
+                        builder: (context, arenaConstraints) {
+                          final compactHeight =
+                              arenaConstraints.maxHeight < 520;
+
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: compactHeight ? 4 : 8,
+                            ),
+                            child: Column(
                               children: [
-                                CompanionAvatarWidget(
-                                  companion: controller.currentCompanion,
-                                  mood: controller.companionMood,
-                                  size: 80,
-                                  onTap: () => controller.cycleCompanion(),
+                                // Companion Cheer Row
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CompanionAvatarWidget(
+                                      companion: controller.currentCompanion,
+                                      mood: controller.companionMood,
+                                      size: compactHeight ? 58 : 80,
+                                      onTap: () =>
+                                          controller.cycleCompanion(),
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Flexible(
+                                      child: SpeechBubbleWidget(
+                                        text: controller.companionSpeech,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(width: 12),
-                                Flexible(
-                                  child: SpeechBubbleWidget(text: controller.companionSpeech),
+
+                                SizedBox(height: compactHeight ? 4 : 10),
+
+                                // Main Practice Card
+                                Expanded(
+                                  child: Center(
+                                    child: SingleChildScrollView(
+                                      child: Container(
+                                        width: double.infinity,
+                                        padding: EdgeInsets.all(
+                                          compactHeight ? 10 : 18,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.92),
+                                          borderRadius:
+                                          BorderRadius.circular(28),
+                                          border: Border.all(
+                                            color: AppColors.lavenderBorder,
+                                            width: 2,
+                                          ),
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Colors.black12,
+                                              blurRadius: 10,
+                                              offset: Offset(0, 4),
+                                            ),
+                                          ],
+                                        ),
+                                        child: _buildStageContent(controller),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                SizedBox(height: compactHeight ? 4 : 10),
+
+                                // Keyboard
+                                CartoonKeyboardWidget(
+                                  targetKey: controller.targetKey,
+                                  lastPressedKey: controller.lastPressedKey,
+                                  onKeyPress: controller.handleKeyPress,
+                                  showFingerGuides:
+                                  settings.showFingerGuides,
                                 ),
                               ],
                             ),
-
-                            const SizedBox(height: 10),
-
-                            // Main Practice Card
-                            Expanded(
-                              child: Center(
-                                child: SingleChildScrollView(
-                                  child: Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.all(18),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.92),
-                                      borderRadius: BorderRadius.circular(28),
-                                      border: Border.all(color: AppColors.lavenderBorder, width: 2),
-                                      boxShadow: const [
-                                        BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 4)),
-                                      ],
-                                    ),
-                                    child: _buildStageContent(controller),
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            const SizedBox(height: 10),
-
-                            // Keyboard
-                            CartoonKeyboardWidget(
-                              targetKey: controller.targetKey,
-                              lastPressedKey: controller.lastPressedKey,
-                              onKeyPress: controller.handleKeyPress,
-                              showFingerGuides: settings.showFingerGuides,
-                            ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
                     ),
                   ],
@@ -367,15 +495,26 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
       borderRadius: BorderRadius.circular(16),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 6,
+        ),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.lavenderDark : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? AppColors.lavenderDark : AppColors.lavenderBorder,
+            color: isSelected
+                ? AppColors.lavenderDark
+                : AppColors.lavenderBorder,
           ),
           boxShadow: isSelected
-              ? [const BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2))]
+              ? [
+            const BoxShadow(
+              color: Colors.black12,
+              blurRadius: 4,
+              offset: Offset(0, 2),
+            ),
+          ]
               : null,
         ),
         child: Row(
@@ -388,7 +527,8 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
-                color: isSelected ? Colors.white : AppColors.lavenderDark,
+                color:
+                isSelected ? Colors.white : AppColors.lavenderDark,
               ),
             ),
           ],
@@ -401,6 +541,7 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
     // 1. ACTIVE AI EXERCISE
     if (controller.activeAiExercise != null) {
       final ex = controller.activeAiExercise!;
+
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -408,26 +549,42 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.lavender,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   '✨ ${ex.worldName}',
-                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppColors.lavenderDark),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.lavenderDark,
+                  ),
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.butterYellow,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.butterYellowBorder),
+                  border: Border.all(
+                    color: AppColors.butterYellowBorder,
+                  ),
                 ),
                 child: Text(
                   '⭐ +${ex.starsReward} Stars',
-                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppColors.butterYellowDark),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.butterYellowDark,
+                  ),
                 ),
               ),
             ],
@@ -435,17 +592,35 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
           const SizedBox(height: 8),
           Text(
             ex.title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColors.textDark),
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textDark,
+            ),
           ),
           if (ex.hint != null) ...[
             const SizedBox(height: 4),
-            Text('💡 ${ex.hint!}', style: const TextStyle(fontSize: 12, color: AppColors.textMuted)),
+            Text(
+              '💡 ${ex.hint!}',
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.textMuted,
+              ),
+            ),
           ],
           const SizedBox(height: 12),
           if (ex.text.length <= 8 && !ex.text.contains(' '))
-            WordTilesWidget(targetWord: ex.text, userInput: controller.userInput, largeText: controller.settings.largeText)
+            WordTilesWidget(
+              targetWord: ex.text,
+              userInput: controller.userInput,
+              largeText: controller.settings.largeText,
+            )
           else
-            SentenceDisplayWidget(targetText: ex.text, userInput: controller.userInput, largeText: controller.settings.largeText),
+            SentenceDisplayWidget(
+              targetText: ex.text,
+              userInput: controller.userInput,
+              largeText: controller.settings.largeText,
+            ),
           const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -468,85 +643,133 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
     // 2. STAGE A: ALPHABET
     if (controller.currentStage == StageId.alphabet) {
       final item = kAlphabetList[controller.alphabetIndex];
+
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(item.icon, style: const TextStyle(fontSize: 32)),
-              const SizedBox(width: 8),
               Text(
-                item.wordSample,
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.lavenderDark),
+                item.icon,
+                style: const TextStyle(fontSize: 32),
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  item.wordSample,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.lavenderDark,
+                  ),
+                ),
               ),
               IconButton(
-                icon: const Icon(Icons.volume_up_rounded, color: AppColors.lavenderDark),
+                icon: const Icon(
+                  Icons.volume_up_rounded,
+                  color: AppColors.lavenderDark,
+                ),
                 onPressed: () => controller.pronounceCurrent(),
               ),
             ],
           ),
           Text(
             'Phonics: "${item.phonics}"',
-            style: const TextStyle(fontSize: 12, color: AppColors.textMuted, fontWeight: FontWeight.w600),
+            style: const TextStyle(
+              fontSize: 12,
+              color: AppColors.textMuted,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-          if (controller.settings.showUrduHints && item.urduPhonics != null) ...[
+          if (controller.settings.showUrduHints &&
+              item.urduPhonics != null) ...[
             const SizedBox(height: 4),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 2,
+              ),
               decoration: BoxDecoration(
                 color: AppColors.mint,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
                 item.urduPhonics!,
-                style: const TextStyle(fontSize: 12, color: AppColors.mintDark, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: AppColors.mintDark,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
           const SizedBox(height: 12),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 32,
+              vertical: 12,
+            ),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [Color(0xFFF3E8FF), Color(0xFFFCE7F3)],
+                colors: [
+                  Color(0xFFF3E8FF),
+                  Color(0xFFFCE7F3),
+                ],
               ),
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: AppColors.lavenderBorder, width: 3),
+              border: Border.all(
+                color: AppColors.lavenderBorder,
+                width: 3,
+              ),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
-              children: [
-                Text(
-                  item.uppercase,
-                  style: TextStyle(
-                    fontSize: controller.settings.largeText ? 76 : 64,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.lavenderDark,
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text(
+                    item.uppercase,
+                    style: TextStyle(
+                      fontSize:
+                      controller.settings.largeText ? 76 : 64,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.lavenderDark,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 16),
-                Text(
-                  item.lowercase,
-                  style: TextStyle(
-                    fontSize: controller.settings.largeText ? 52 : 44,
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFF8B5CF6),
+                  const SizedBox(width: 16),
+                  Text(
+                    item.lowercase,
+                    style: TextStyle(
+                      fontSize:
+                      controller.settings.largeText ? 52 : 44,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF8B5CF6),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 10),
-          Text(
-            'Find and tap "${item.uppercase}" on the keyboard below!',
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: AppColors.textDark),
+          const Text(
+            'Find and tap the target letter on the keyboard below!',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+              color: AppColors.textDark,
+            ),
           ),
           TextButton.icon(
             icon: const Icon(Icons.refresh_rounded, size: 14),
-            label: const Text('Practice letter again', style: TextStyle(fontSize: 11)),
+            label: const Text(
+              'Practice letter again',
+              style: TextStyle(fontSize: 11),
+            ),
             onPressed: () => controller.repeatCurrent(),
           ),
         ],
@@ -556,6 +779,7 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
     // 3. STAGE B: WORDS
     if (controller.currentStage == StageId.words) {
       final item = kWordList[controller.wordIndex];
+
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -571,21 +795,43 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                item.hint,
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.textDark),
+              Flexible(
+                child: Text(
+                  item.hint,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textDark,
+                  ),
+                ),
               ),
               IconButton(
-                icon: const Icon(Icons.volume_up_rounded, color: AppColors.lavenderDark, size: 20),
+                icon: const Icon(
+                  Icons.volume_up_rounded,
+                  color: AppColors.lavenderDark,
+                  size: 20,
+                ),
                 onPressed: () => controller.pronounceCurrent(),
               ),
             ],
           ),
-          if (controller.settings.showUrduHints && item.urduMeaning != null) ...[
-            Text('اردو: ${item.urduMeaning!}', style: const TextStyle(fontSize: 12, color: AppColors.mintDark, fontWeight: FontWeight.bold)),
-          ],
+          if (controller.settings.showUrduHints &&
+              item.urduMeaning != null)
+            Text(
+              'اردو: ${item.urduMeaning!}',
+              style: const TextStyle(
+                fontSize: 12,
+                color: AppColors.mintDark,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           const SizedBox(height: 8),
-          WordTilesWidget(targetWord: item.word, userInput: controller.userInput, largeText: controller.settings.largeText),
+          WordTilesWidget(
+            targetWord: item.word,
+            userInput: controller.userInput,
+            largeText: controller.settings.largeText,
+          ),
         ],
       );
     }
@@ -593,29 +839,53 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
     // 4. STAGE C: SENTENCES
     if (controller.currentStage == StageId.sentences) {
       final item = kSentenceList[controller.sentenceIndex];
+
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('🌈 Sentence Adventure', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.lavenderDark)),
+              const Flexible(
+                child: Text(
+                  '🌈 Sentence Adventure',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.lavenderDark,
+                  ),
+                ),
+              ),
               IconButton(
-                icon: const Icon(Icons.volume_up_rounded, color: AppColors.lavenderDark, size: 20),
+                icon: const Icon(
+                  Icons.volume_up_rounded,
+                  color: AppColors.lavenderDark,
+                  size: 20,
+                ),
                 onPressed: () => controller.pronounceCurrent(),
               ),
             ],
           ),
           const SizedBox(height: 8),
-          SentenceDisplayWidget(targetText: item.sentence, userInput: controller.userInput, largeText: controller.settings.largeText),
+          SentenceDisplayWidget(
+            targetText: item.sentence,
+            userInput: controller.userInput,
+            largeText: controller.settings.largeText,
+          ),
           const SizedBox(height: 10),
           Text(
             controller.targetKey == ' '
                 ? '👉 Tap the big SPACEBAR!'
                 : controller.targetKey == '.'
-                    ? '👉 Tap the dot . to finish!'
-                    : 'Target key: ${controller.targetKey}',
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColors.lavenderDark),
+                ? '👉 Tap the dot . to finish!'
+                : 'Target key: ${controller.targetKey}',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              color: AppColors.lavenderDark,
+            ),
           ),
         ],
       );
@@ -623,21 +893,41 @@ class _TypingAdventureScreenState extends State<TypingAdventureScreen> {
 
     // 5. STAGE D: PARAGRAPHS
     final story = kParagraphList[controller.paragraphIndex];
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('🏰 ${story.title}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColors.lavenderDark)),
+            Expanded(
+              child: Text(
+                '🏰 ${story.title}',
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.lavenderDark,
+                ),
+              ),
+            ),
             Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   'Step ${controller.paragraphSentenceStep + 1}/${story.sentences.length}',
-                  style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: AppColors.textMuted),
+                  style: const TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textMuted,
+                  ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.volume_up_rounded, color: AppColors.lavenderDark, size: 18),
+                  icon: const Icon(
+                    Icons.volume_up_rounded,
+                    color: AppColors.lavenderDark,
+                    size: 18,
+                  ),
                   onPressed: () => controller.pronounceCurrent(),
                 ),
               ],
